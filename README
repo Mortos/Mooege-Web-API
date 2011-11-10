@@ -1,0 +1,30 @@
+THIS IS MY INITIAL WEB ACCOUNT INTEGRATION FOR MOOEGE EMULATOR CONSIDER THAT MY ENGLISH I VERY BAD.
+i use this debugged function in mooege code to compare php output to mooege SRP, in the first steap i print in console
+the salt so i can use it in php code by adding it manually and test the progress of protocol.
+
+        public static byte[] CalculatePasswordVerifierForAccount(string email, string password, byte[] salt)
+        {
+            // x = H(s, p) -> s: randomly choosen salt
+            // v = g^x (computes password verifier)
+            Console.WriteLine(salt.ToHexString());
+            // TODO: it seems hashing identity-salt + password bugs for passwords with >11 chars or so.
+            // we need to get rid of that identity-salt in pBytes /raist.
+            //Console.WriteLine(email);
+            //Console.WriteLine(Encoding.ASCII.GetBytes(email).ToHexString());
+            var identitySalt = H.ComputeHash(Encoding.ASCII.GetBytes(email)).ToHexString(); // Identity salt that's hashed using account email.
+            //Console.WriteLine(identitySalt);
+            //Console.WriteLine(Encoding.ASCII.GetBytes(identitySalt.ToUpper() + ":" + password.ToUpper()).ToHexString());
+            //Console.WriteLine(identitySalt.ToUpper() + ":" + password.ToUpper());
+            var pBytes = H.ComputeHash(Encoding.ASCII.GetBytes(identitySalt.ToUpper() + ":" + password.ToUpper())); // p (identitySalt + password)
+            //Console.WriteLine(pBytes.ToHexString());
+            //Console.WriteLine(new byte[0].Concat(salt).Concat(pBytes).ToArray().ToString());
+            Logger Logger = LogManager.CreateLogger(); Logger.Debug("Mail: " + email + "PW: " + password); foreach (byte b in new byte[0].Concat(salt).Concat(pBytes)) { Logger.Debug("Byte:" + b); }
+            Console.WriteLine("{0}", new byte[0].Concat(salt).Concat(pBytes).ToArray().ToHexString());
+            Console.WriteLine("x: {0}", H.ComputeHash(new byte[0].Concat(salt).Concat(pBytes).ToArray()).ToHexString());
+            var x = H.ComputeHash(new byte[0].Concat(salt).Concat(pBytes).ToArray()).ToBigInteger(); // x = H(s, p)
+            Console.WriteLine(x);
+            return BigInteger.ModPow(g, x, N).ToArray();
+        }
+
+the problem is by comparing x hash valued generate with php and x hash value generate by mooege Hex its different and i'am 
+not able to undestand whats wrong, every suggestion is appreciate!
