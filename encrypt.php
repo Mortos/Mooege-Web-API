@@ -70,7 +70,7 @@ echo $identitySalt."<br>";
 $p_string = strtoupper($identitySalt).":".strtoupper($password);
 $pBytes = hash(sha256,$p_string,false);
 echo "process pBytes = <b>".$p_string."</b> <br> Hex = <b>".ascii_to_hex($p_string)."</b> <br>";
-echo " this is pBytes hash: ".$pBytes."<br>";
+echo "this is pBytes hash: ".$pBytes."<br>";
 
 // g is A generator modulo N 
 $g = 0x02;
