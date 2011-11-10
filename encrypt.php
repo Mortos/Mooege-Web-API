@@ -48,14 +48,31 @@ $email=$_POST['email'];
 // $salt is ranmbly number unique for the user
 echo "Process Salt unique random 32 bytes<br>";
 //$salt = getRAndomByte($email);
-$salt = "CD888B3627B2620F441FC9BB513E61F37B5A126ECBE1A9BC20039BDC2B8BDC88";  
+$salt = "EE8FB5BE753830DF5EE2602FC3CDC78EF265810CAEC4C79C355398AC7E0C5AEB";  
 echo $salt,"<br>";
 $saltHex = bin2hex($salt);
 //echo $hex;
 // N is large safe prime
+echo "debug N bigInt <br>";
 $N_packet =  "\xAB\x24\x43\x63\xA9\xC2\xA6\xC3\x3B\x37\xE4\x61\x84\x25\x9F\x8B\x3F\xCB\x8A\x85\x27\xFC\x3D\x87\xBE\xA0\x54\xD2\x38\x5D\x12\xB7\x61\x44\x2E\x83\xFA\xC2\x21\xD9\x10\x9F\xC1\x9F\xEA\x50\xE3\x09\xA6\xE5\x5E\x23\xA7\x77\xEB\x00\xC7\xBA\xBF\xF8\x55\x8A\x0E\x80\x2B\x14\x1A\xA2\xD4\x43\xA9\xD4\xAF\xAD\xB5\xE1\xF5\xAC\xA6\x13\x1C\x69\x78\x64\x0B\x7B\xAF\x9C\xC5\x50\x31\x8A\x23\x08\x01\xA1\xF5\xFE\x31\x32\x7F\xE2\x05\x82\xD6\x0B\xED\x4D\x55\x32\x41\x94\x29\x6F\x55\x7D\xE3\x0F\x77\x19\xE5\x6C\x30\xEB\xDE\xF6\xA7\x86";
 $N =  "AB244363A9C2A6C33B37E46184259F8B3FCB8A8527FC3D87BEA054D2385D12B761442E83FAC221D9109FC19FEA50E309A6E55E23A777EB00C7BABFF8558A0E802B141AA2D443A9D4AFADB5E1F5ACA6131C6978640B7BAF9CC550318A230801A1F5FE31327FE20582D60BED4D55324194296F557DE30F7719E56C30EBDEF6A786";
-$bigN =  new Math_BigInteger($N,16);	
+$N_bin = hex2bin($N);
+
+$little_N = unpack("n*",$N_bin);
+
+for($i = count($little_N) ; $i > 0 ; $i--) {
+			$pre_BigN .= pack("v",$little_N[$i]);
+		
+	}
+$bigN =  new Math_BigInteger($pre_BigN,256);
+echo "big N may is : <br>".$bigN."<br>";	
+ /*
+ $a = new Math_BigInteger('94558736629309251206436488916623864910444695865064772352148093707798675228170106115630190094901096401883540229236016599430725894430734991444298272129143681820273859470730877741629279425748927230996376833577406570089078823475120723855492588316592686203439138514838131581023312004481906611790561347740748686507');
+
+ echo $a->toBytes(); // outputs chr(65
+ echo "<br>".$pre_BigN;
+ */
+echo "<br>";
 //echo $bigN;
 	//for($i=0;$i<count($N);$i++)		
 		//$N_concat = pack("nvc*",0xAB0x24);
@@ -72,10 +89,12 @@ $pBytes = hash(sha256,$p_string,false);
 echo "process pBytes = <b>".$p_string."</b> <br> Hex = <b>".ascii_to_hex($p_string)."</b> <br>";
 echo "this is pBytes hash: ".$pBytes."<br>";
 
-// g is A generator modulo N 
-$g = 0x02;
-$g = new Math_BigInteger($g,16);
-//echo $g;
+// g is generator modulo N 
+echo "debug G BigInt <br>";
+$g = 02;
+$g_bin = hex2bin($g);
+$g = new Math_BigInteger($g_bin,256);
+echo "G may is: ".$g."<br>";
 
 // x = Hash(s,p)
 echo "debug x process <br>";
@@ -96,7 +115,7 @@ foreach ( str_split($x) as $char ) {
 	}*/
 echo "<b>this is the hashed bytes not equals to hash output of mooege code x: ".$x."</b><br>";
 //echo $hexX = ascii_to_hex($x);
-$x_=hex2bin($x);
+//$x_=hex2bin($x);
 
 echo "<br>";
 $little = unpack("n*",$x);
@@ -109,6 +128,7 @@ echo "Process calculate BigX :<br>";
 $bigX = new Math_BigInteger($little_x,256);
 echo $bigX."<br>";
 // calculate v = password verify  v = g^x (computes password verifier) mod N
+echo "process doing modPow and generates the password verifier input for database account<br>";
 $v = $g->modPow($bigX,$bigN);
 echo $v->toString();
 
