@@ -26,5 +26,5 @@ the salt so i can use it in php code by adding it manually and test the progress
             return BigInteger.ModPow(g, x, N).ToArray();
         }
 
-the problem is by comparing x hash valued generate with php and x hash value generate by mooege Hex its different and i'am 
+the problem is by comparing x hash value generate with php and x hash value generate by mooege Hex its different and i'am 
 not able to undestand whats wrong, every suggestion is appreciate!
