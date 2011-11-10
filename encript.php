@@ -69,8 +69,8 @@ echo $identitySalt."<br>";
 // p is hash( identitySalt:password )
 $p_string = strtoupper($identitySalt).":".strtoupper($password);
 $pBytes = hash(sha256,$p_string,false);
-echo "process pBytes = <b>".$p_string."</b> <br> Hex = <b>".ascii_to_hex($p_string)."</b> :<br>";
-echo $pBytes."<br>";
+echo "process pBytes = <b>".$p_string."</b> <br> Hex = <b>".ascii_to_hex($p_string)."</b> <br>";
+echo " this is pBytes hash: ".$pBytes."<br>";
 
 // g is A generator modulo N 
 $g = 0x02;
@@ -79,18 +79,18 @@ $g = new Math_BigInteger($g,16);
 
 // x = Hash(s,p)
 echo "debug x process <br>";
-$prova = $salt.strtoupper($pBytes);
-echo $prova."<br>";
+$pre_x = $salt.strtoupper($pBytes);
+echo "this is Hex of concat x: ".$pre_x."<br>";
 //echo $out_put=pack("H*",$prova)."<br>";
-$bin = (hex2bin($prova));
+$bin = (hex2bin($pre_x));
 foreach ( str_split($bin) as $char ) {
 			$out_put .= ord($char); 
 	}
-echo "<br>".$out_put,"<br>";
+echo "<br>this is bytes of x :<br>".$out_put."<br>";
 
 $x = hash(sha256,$out_put,false);
 //$x = encodeBytes($x);
-echo $x;
+echo "<b>this is the hashed bytes not equals to hash output of mooege code x: ".$x."</b><br>";
 //echo $hexX = ascii_to_hex($x);
 
 //convert hex hashed X to BigInt
