@@ -33,7 +33,7 @@
             var passwordVerifier = SRP6a.CalculatePasswordVerifierForAccount(email, password, salt)
 
 */
-include("BigInteger.php");
+include("Lib/BigInteger.php");
 $password=$_POST['password'];
 $email=$_POST['email'];
 
