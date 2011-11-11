@@ -3,7 +3,7 @@ i use this debugged function in mooege code to compare php output to mooege SRP,
 the salt so i can use it in php code by adding it manually and test the progress of protocol.
 
 * Script is beta has to be rewritten and clean up, but seems to work
--IMPORTANT: there are some problems to last step bytes and binary data dosnt match when it was uploaded to db!
+-IMPORTANT: has to be tested if bytes on db is retrived correctly by mooege emu!
 TODO:
 * cleanup code and rewrite it in readble style ( most important)
 * support for mysql
