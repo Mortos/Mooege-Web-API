@@ -1,13 +1,32 @@
-THIS IS MY INITIAL WEB ACCOUNT INTEGRATION FOR MOOEGE EMULATOR CONSIDER THAT MY ENGLISH I VERY BAD.
-i use this debugged function in mooege code to compare php output to mooege SRP, in the first steap i print in console
-the salt so i can use it in php code by adding it manually and test the progress of protocol.
+THIS IS MY INITIAL WEB ACCOUNT INTEGRATION FOR MOOEGE EMULATOR ... CONSIDER THAT MY ENGLISH IS VERY BAD
+I use this debug function in the mooege code to compare php output to mooege SRP. In the first step, it prints
+the salt in the console so I can use it in php code, by manually adding it and testing the progress of the protocol.
 
-* Script is beta has to be rewritten and clean up, but seems to work
--IMPORTANT: has to be tested if bytes on db is retrived correctly by mooege emu!
+* This script is in beta - needs to be rewritten and cleaned up - but seems to work.
+- IMPORTANT: Need to test if bytes in database are retrieved correctly by mooege emu!
+
 TODO:
-* cleanup code and rewrite it in readble style ( most important)
-* support for mysql
-* better grafic interface
-* support for check that is used real email
-* add change password options
-* perform login and session for see account stats and progress.
+* MOST IMPORTANT: cleanup code and rewrite it in readable style;
+* add support for mysql;
+* create a better graphic interface;
+* add support for real email(format) check;
+* add support for change password;
+* Perform a session login to see account stats and progress[Check if Login works].</div><div id='copy_content'>THIS IS MY INITIAL WEB ACCOUNT INTEGRATION FOR MOOEGE EMULATOR ... CONSIDER THAT MY ENGLISH IS VERY BAD[Corrected by RA3OR and Wetwlly].
+I use this debug function in the mooege code to compare php output to mooege SRP. In the first step, it prints
+the salt in the console so I can use it in php code, by manually adding it and testing the progress of the protocol.
+
+* This script is in beta - needs to be rewritten and cleaned up - but seems to work.
+- IMPORTANT: Need to test if bytes in database are retrieved correctly by mooege emu!
+
+TODO:
+* MOST IMPORTANT: cleanup code and rewrite it in readable style;
+* add support for mysql;
+* create a better graphic interface;
+* add support for real email(format) check;
+* add support for change password;
+* Perform a session login to see account stats and progress[Check if Login works].
+
+
+
+// 12 November 2011, 08:47:15 PM
+Corrected by RA3OR and Wetwlly
