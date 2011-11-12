@@ -49,7 +49,7 @@ $email=$_POST['email'];
 echo "Process Salt unique random 32 bytes<br>";
 //$salt = getRAndomByte($email);
 $salt = "D857A8E7C5C7EF5202D5A65C69BFB30BC0FA68D957EF24FC8D38A18B2EA16641";  
-echo $salt,"<br>";
+echo $upsalt=hex2bin($salt); echo "<br>";
 $saltHex = bin2hex($salt);
 //echo $hex;
 // N is large safe prime
@@ -151,14 +151,16 @@ echo hex2bin('2D55194F');
         die($err);
     }
 */
-/*
+
 try 
 {
     /*** connect to SQLite database ***/
-/*
+
     $dbh = new PDO("sqlite:account_.db");
     echo "Handle has been created ...... <br><br>";
-	$err = $dbh->query("INSERT INTO accounts (id,email,salt,passwordVerifier,userLevel) values ('0','$email','$salt','$v->toString()','0') ");
+	$upsalt = sqlite_escape_string($upsalt);
+	$final_out = sqlite_escape_string($final_out);
+	$err = $dbh->query("INSERT INTO accounts (id,email,salt,passwordVerifier,userLevel) values ('1','$email','$upsalt','$final_out','0') ");
     if ($err === FALSE)
     {
         print_r($dbh->errorInfo());
@@ -171,7 +173,7 @@ catch(PDOException $e)
     echo "<br><br>Database -- NOT -- loaded successfully .. ";
     die( "<br><br>Query Closed !!! $error");
 } 
-*/
+
 echo "<br>";
 $try = "60683445811919773798863222188611761022136228504431938369652346294898676478397934261939039724151966156232748957057177993650136849104605467563890584964858417847082365052362779511433190242910819978604133847570752722998578697919705135525622764497365127716302661789756419292995834780114234244965184704756229098613";
 //echo base_convert($try,10,16);
